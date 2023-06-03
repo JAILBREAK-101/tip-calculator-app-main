@@ -1,0 +1,33 @@
+.result {
+    background-color: $neutral-color-very-dark-cyan;
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+
+    @include breakpoints("tablet", 'min-width') {
+        width: 100%;
+    }
+
+    &-amount,
+    &-total {
+        display: flex;
+        justify-content: space-between;
+        color: $primary-color-strong-cyan;
+        font-size: 24px;
+        margin-bottom: 1rem;
+    }
+
+    &-text {
+        font-size: 1rem;
+        max-width: 10ch;
+        color: $neutral-color-light-grayish-cyan;
+
+        &--small {
+            font-size: 0.7rem;
+            color: $neutral-color-grayish-cyan;
+        }
+    }
+}

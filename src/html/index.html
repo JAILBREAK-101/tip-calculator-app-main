@@ -9,52 +9,87 @@
   <title>Tip calculator app</title>
 
   <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap" rel="stylesheet">
 
   <!-- Styles - SASS -->
-  <link rel="stylesheet" href="../sass/main.scss">
-
-  <style>
-    .attribution {
-      font-size: 11px;
-      text-align: center;
-    }
-
-    .attribution a {
-      color: hsl(228, 45%, 44%);
-    }
-  </style>
+  <link rel="stylesheet" href="../../public/build/styles.css">
 </head>
 
 <body>
 
+  <div class="wrapper">
+    <header class="header">
+      <img src="../../images/logo.svg" alt="Image-Logo" class="header-logo">
+    </header>
 
+    <main class="main">
 
-  <!-- OUT OF BOUND - DETAIL TEXTS.
-  Bill
+      <section class="control">
+        <div class="control-block control-bill">
+          <h2 class="control-header">Bill
+            <span class="control-error-msg"></span>
+          </h2>
+          <fieldset class="control-input-field">
+            <label class="control-label" for="bill"><img src="../../images/icon-dollar.svg" alt="Dollar Icon">
+            </label>
+            <input data-bill-amount class="control-input control--bill" type="text" id="bill" minlength="1"
+              maxlength="9" name="bill" required>
+          </fieldset>
+        </div>
 
-  Select Tip %
-  5%
-  10%
-  15%
-  25%
-  50%
-  Custom
+        <div class="control-block control-tip">
+          <h2 class="control-header">Select Tip %</h2>
 
-  Number of People
+          <section class="control-grid">
+            <button data-grid-button class="button control-grid-button control-grid-button--selected">5%</button>
+            <button data-grid-button class="button control-grid-button control-grid-button--selected">10%</button>
+            <button data-grid-button class="button control-grid-button control-grid-button--selected">15%</button>
+            <button data-grid-button class="button control-grid-button control-grid-button--selected">25%</button>
+            <button data-grid-button class="button control-grid-button control-grid-button--selected">50%</button>
+            <input type="text" class="control-input" placeholder="Custom" name="Custom Tip Value">
+            <!-- <button data-grid-button class="button control-grid-button control-grid-button--selected">Custom</button> -->
+          </section>
+        </div>
 
-  Tip Amount
-  / person
+        <div class="control-block control-people">
+          <h2 class="control-header">Number of People
+            <span data-error-msg class="control-error-msg"></span>
+          </h2>
+          <fieldset class="control-input-field">
+            <label class="control-label" for="people"><img src="../../images/icon-person.svg" alt="Person Icon"></label>
+            <input data-no-of-people class="control-input control--people" type="text" minlength="1" maxlength="9"
+              id="people" name="people" required>
+          </fieldset>
+        </div>
+      </section>
 
-  Total
-  / person
+      <section class="result">
+        <div class="result-display">
+          <section class="result-amount">
+            <h3 class="result-text result-text--big">Tip Amount <span class="result-text--small"> / person</span></h3>
 
-  Reset
+            <h1>$<span class="result-amount--value" data-tip-value></span></h1>
+          </section>
 
-   -->
+          <section class="result-total">
+            <h3 class="result-text result-text--big">Total <span class="result-text--small"> / person</span></h3>
+
+            <h1>$<span class="result-total--value" data-total-value></span></h1>
+          </section>
+        </div>
+        <button data-reset-button class="button result-button result-button--disabled">RESET</button>
+      </section>
+    </main>
+  </div>
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-    Coded by <a href="#">Your Name Here</a>.
+    Coded by <a class="attribution-link" href="#">Your Name Here</a>.
   </div>
+
+  <!-- <script src="../js/script.js"></script> -->
+  <script src="../js/oop.js"></script>
 </body>
 
 </html>

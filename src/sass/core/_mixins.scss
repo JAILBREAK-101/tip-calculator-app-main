@@ -1,0 +1,40 @@
+// Here comes responsive CSS and other reusable CSS code
+$mobile-breakpoint: 375px;
+$tablet-breakpoint: 750px;
+$desktop-breakpoint: 1440px;
+
+@mixin breakpoints($breakpoint, $media-type) {
+    @if $breakpoint=='mobile' {
+        @media screen and ($media-type: $mobile-breakpoint) {
+            @content;
+        }
+    }
+
+    @if $breakpoint=='tablet' {
+        @media screen and ($media-type: $tablet-breakpoint) {
+            @content;
+        }
+    }
+
+    @if $breakpoint=='desktop' {
+        @media screen and ($media-type: $desktop-breakpoint) {
+            @content;
+        }
+    }
+
+    // custom media queries
+    @if $breakpoint=='custom' {
+        @media screen and (#{$media-type}: #{$breakpoint + px}) {
+            @content;
+        }
+    }
+}
+
+// bem class
+@mixin BEM($block, $element, $modifier) {
+    #{$block} {
+        @at-root #{&}-#{$element} {}
+
+        @at-root #{&}--#{$modifier} {}
+    }
+}

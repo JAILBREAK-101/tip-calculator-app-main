@@ -1,0 +1,47 @@
+.control-input-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    position: relative;
+    padding: 0;
+    border-radius: 5px;
+}
+
+.control-label {
+    position: absolute;
+    left: 15px;
+}
+
+.control-input {
+    appearance: none;
+    padding: 0.8rem;
+    background-color: $neutral-color-very-light-grayish-cyan;
+    font-size: 24px;
+    text-align: right;
+    font-weight: 700;
+    width: 200px;
+    // position: relative;
+    color: $neutral-color-very-dark-cyan;
+    width: 100%;
+    border-radius: 10px;
+
+    &::placeholder {
+        color: $neutral-color-grayish-cyan;
+    }
+
+    &:focus-visible {
+        outline: 2px solid $primary-color-strong-cyan;
+    }
+}
+
+.control-error-msg {
+    display: block;
+    color: hsl(0, 100%, 50%);
+}
+
+.error-input {
+    &:focus-visible {
+        outline: 1px solid hsl(0, 100%, 50%) !important;
+    }
+}

@@ -1,0 +1,33 @@
+button {
+    padding: 1rem 1.5rem;
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.control-grid {
+    &-button {
+        color: $white-color;
+        background-color: $neutral-color-very-dark-cyan;
+    }
+
+    &-button:nth-child(6) {
+        background-color: $neutral-color-very-light-grayish-cyan;
+        color: $neutral-color-grayish-cyan;
+    }
+
+    &-button:focus {
+        background-color: $primary-color-strong-cyan;
+        color: $neutral-color-very-dark-cyan;
+    }
+}
+
+.result-button {
+    background-color: $primary-color-strong-cyan;
+    color: $neutral-color-very-dark-cyan;
+
+    &:disabled {
+        opacity: 0.2;
+    }
+}

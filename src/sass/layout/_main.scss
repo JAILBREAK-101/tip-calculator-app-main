@@ -1,0 +1,18 @@
+@use '../core/variables';
+
+.main {
+    background-color: $white-color;
+    border-radius: 20px;
+    margin: 0.2rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @include breakpoints("tablet", 'min-width') {
+        flex-direction: row;
+        margin: 0.6rem;
+        justify-content: space-between;
+        gap: 4rem;
+    }
+}
