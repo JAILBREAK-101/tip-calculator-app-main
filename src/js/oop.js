@@ -20,104 +20,152 @@ const resetButton = document.querySelector("[data-reset-button]");
 let selectedButtonValue;
 
 class TipCalculator {
-  constructor(billAmount, tipAmount, errorMessage, totalAmount, noOfPeople) {
-    this.billAmount = billAmount;
-    this.tipAmount = tipAmount;
-    this.errorMessage = errorMessage;
-    this.totalAmount = totalAmount;
-    this.noOfPeople = noOfPeople;
+  constructor(initialValue, bill, people, tip, selectedTip) {
+    this.initialValue = initialValue;
+    this.bill = bill;
+    this.people = people;
+    this.tip = tip;
+    this.selectedTip = selectedTip;
+  }
+
+  // Getters and setters
+  /**
+   * @param {(arg0: any) => void} billAmount
+   */
+  set setBillAmount(billAmount) {
+    if (typeof parseInt(noOfPeople) === NaN) return;
+    this.bill += billAmount;
+  }
+
+  /**
+   * @param {(arg0: any) => void} noOfPeople
+   */
+  set setNoOfPeople(noOfPeople) {
+    if (typeof parseInt(noOfPeople) === NaN) return;
+    this.people += noOfPeople;
+  }
+
+  setTipAmount(tipAmount) {
+    this.tip = tipAmount;
+  }
+
+  setSelect(selectedButton) {
+    this.selectedTip = selectedButton;
+  }
+
+  // Pure Methods
+  get calculateTipAmount() {
+    this.setTipAmount(
+      (tipAmount = eval(this.bill / this.people) / 100) * this.selectedTip
+    ); // setters should only be accessed outside the class, but not called as methods inside or outside the class, same as getters
+    console.log(this.tip);
   }
 
   pickSelect(select) {
-    selectedButtonValue = parseInt(select.innerText);
+    if (select.innerText.length > 2) {
+      this.setSelect(select.innerText.slice(0, 2));
+    } else {
+      this.setSelect(select.innerText.slice(0, 1));
+    }
+    console.log(this.selectedTip);
   }
 
-  calculateTipAmount(e) {
-    if (typeof e.key !== "string") return;
-    else {
-      tipAmount.innerText += e.key;
+  extractTip(tipValue) {
+    let slicedTipValue;
+    if (tipValue.innerText.length > 2) {
+      slicedTipValue = tipValue.innerText.slice(0, 2);
+    } else {
+      slicedTipValue = tipValue.innerText.slice(0, 1);
     }
   }
-
-  calculateTotalAmount(e) {}
 
   // Number Input Validation
-  setInputFilter(val) {
-    (val) => {
-      return /^\d*\.?\d*$/.test(val);
-    };
-  }
 
-  checkInputs(input, inputFilter) {
-    {
-      [
-        "input",
-        "keydown",
-        "keyup",
-        "mousedown",
-        "mouseup",
-        "select",
-        "contextmenu",
-        "drop",
-      ].forEach((event) => {
-        input.addEventListener(event, () => {
-          if (inputFilter(this.value)) {
-            this.oldValue = this.value;
-            this.oldSelectionStart = this.selectionStart;
-            this.oldSelectionEnd = this.selectionEnd;
-          } else if (this.hasOwnProperty("oldValue")) {
-            this.value = this.oldValue;
-            this.setSelectionRange(
-              this.oldSelectionStart,
-              this.oldSelectionEnd
-            );
-          } else {
-            this.value = "";
-          }
-        });
-      });
-    }
+  checkInputs(...inputs) {
     // Number Input validation
 
-    // if (parseInt(input.key) === 0) {
-    //   errorMessage.innerText = "Can't be zero";
-    //   input.classList.add("error-input");
-    // } else {
-    //   errorMessage.innerText = "";
-    //   input.classList.remove("error-input");
-    // }
+    inputs.forEach((input) => {
+      input.addEventListener("keypress", (e) => {
+        console.log(e);
+        if (parseInt(e.key) === 0) {
+          errorMessage.innerText = "Can't be zero";
+        } else {
+          errorMessage.innerText = "";
+        }
+      });
+    });
   }
 
   resetInputs(...e) {
     e.forEach((value) => {
-      value.value = "";
+      value.value = null;
       try {
         value.innerText = initialVal;
-      } catch (e) {
-        console.log(e, "error, not possible");
+      } catch (err) {
+        console.log(err, "error, not possible");
       }
     });
   }
 }
 
 // The Class Created App
-const CalculatorApp = new TipCalculator(billAmount, tipAmount);
-
+const CalculatorApp = new TipCalculator(
+  initialVal,
+  billAmount.value,
+  noOfPeople.value
+);
 // Add Event Listener
 billAmount.addEventListener("keypress", (e) => {
-  CalculatorApp.calculateTipAmount(e);
-});
-
-noOfPeople.addEventListener("keypress", () => {});
-
-tipSelects.forEach((select) => () => {
-  CalculatorApp.pickSelect(select);
+  // CalculatorApp.setBillAmount = e.key;
+  // CalculatorApp.calculateTipAmount;
+  console.log(isNaN(parseInt(e.key)));
 });
 
 noOfPeople.addEventListener("keypress", (e) => {
-  CalculatorApp.checkInputs(e, CalculatorApp.setInputFilter(e.target.value));
+  CalculatorApp.setNoOfPeople = e.key;
+  CalculatorApp.calculateTipAmount;
+});
+
+tipSelects.forEach((select) => {
+  select.addEventListener("click", () => {
+    CalculatorApp.pickSelect(select);
+  });
 });
 
 resetButton.addEventListener("click", () =>
   CalculatorApp.resetInputs(billAmount, noOfPeople, tipAmount, totalAmount)
 );
+
+//   {
+//     [
+//       "input",
+//       "keydown",
+//       "keyup",
+//       "mousedown",
+//       "mouseup",
+//       "select",
+//       "contextmenu",
+//       "drop",
+//     ].forEach((event) => {
+//       input.addEventListener(event, () => {
+//         if (inputFilter(this.value)) {
+//           this.oldValue = this.value;
+//           this.oldSelectionStart = this.selectionStart;
+//           this.oldSelectionEnd = this.selectionEnd;
+//         } else if (this.hasOwnProperty("oldValue")) {
+//           this.value = this.oldValue;
+//           this.setSelectionRange(
+//             this.oldSelectionStart,
+//             this.oldSelectionEnd
+//           );
+//         } else {
+//           this.value = "";
+//         }
+//       });
+//     });
+//   }
+// setInputFilter(val) {
+//   (val) => {
+//     return /^\d*\.?\d*$/.test(val);
+//   };
+// }
