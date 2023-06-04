@@ -1,4 +1,4 @@
-// Variables
+8; // Variables
 let billAmount = document
   .querySelector("[data-bill-amount]")
   .value.toPrecision(3);
