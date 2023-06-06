@@ -29,8 +29,13 @@
     &::placeholder {
         color: $neutral-color-grayish-cyan;
     }
+}
 
-    &:focus-visible {
+.control-focus-input {
+
+    &:focus-visible,
+    &:active,
+    &:focus-within {
         outline: 2px solid $primary-color-strong-cyan;
     }
 }

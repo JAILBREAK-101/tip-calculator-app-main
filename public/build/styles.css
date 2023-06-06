@@ -182,19 +182,6 @@ button {
   border-radius: 5px;
 }
 
-.control-grid-button {
-  color: hsl(0, 0%, 100%);
-  background-color: hsl(183, 100%, 15%);
-}
-.control-grid-button:nth-child(6) {
-  background-color: hsl(189, 41%, 97%);
-  color: hsl(184, 14%, 56%);
-}
-.control-grid-button:focus {
-  background-color: hsl(172, 67%, 45%);
-  color: hsl(183, 100%, 15%);
-}
-
 .result-button {
   background-color: hsl(172, 67%, 45%);
   color: hsl(183, 100%, 15%);
@@ -233,7 +220,8 @@ button {
 .control-input::placeholder {
   color: hsl(184, 14%, 56%);
 }
-.control-input:focus-visible {
+
+.control-focus-input:focus-visible, .control-focus-input:active, .control-focus-input:focus-within {
   outline: 2px solid hsl(172, 67%, 45%);
 }
 
@@ -248,6 +236,19 @@ button {
 
 .header-logo {
   width: 80px;
+}
+
+.control-grid-select {
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(183, 100%, 15%);
+}
+.control-grid-select:nth-child(6) {
+  background-color: hsl(189, 41%, 97%);
+  color: hsl(184, 14%, 56%);
+}
+.control-grid-select:focus, .control-grid-select:focus-visible, .control-grid-select:focus-within, .control-grid-select-focus {
+  background-color: hsl(172, 67%, 45%);
+  color: hsl(183, 100%, 15%);
 }
 
 .header {

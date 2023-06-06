@@ -1,0 +1,20 @@
+.control-grid {
+    &-select {
+        color: $white-color;
+        background-color: $neutral-color-very-dark-cyan;
+    }
+
+    &-select:nth-child(6) {
+        background-color: $neutral-color-very-light-grayish-cyan;
+        color: $neutral-color-grayish-cyan;
+    }
+
+    // For Accessibility purposes, keep focus
+    &-select:focus,
+    &-select:focus-visible,
+    &-select:focus-within,
+    &-select-focus {
+        background-color: $primary-color-strong-cyan;
+        color: $neutral-color-very-dark-cyan;
+    }
+}
