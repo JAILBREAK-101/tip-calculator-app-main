@@ -2,6 +2,7 @@
     &-select {
         color: $white-color;
         background-color: $neutral-color-very-dark-cyan;
+        transition: 0.12s background-color;
     }
 
     &-select:nth-child(6) {
@@ -16,5 +17,9 @@
     &-select-focus {
         background-color: $primary-color-strong-cyan;
         color: $neutral-color-very-dark-cyan;
+    }
+
+    &-select:hover {
+        background-color: $neutral-color-grayish-cyan
     }
 }

@@ -24,6 +24,7 @@
         font-size: 1rem;
         max-width: 10ch;
         color: $neutral-color-light-grayish-cyan;
+        word-wrap: break-word;
 
         &--small {
             font-size: 0.7rem;

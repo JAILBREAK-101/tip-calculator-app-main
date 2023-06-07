@@ -16,8 +16,8 @@
 .control-input {
     appearance: none;
     padding: 0.8rem;
+    margin-top: 0.2rem;
     background-color: $neutral-color-very-light-grayish-cyan;
-    font-size: 24px;
     text-align: right;
     font-weight: 700;
     width: 200px;
@@ -25,6 +25,7 @@
     color: $neutral-color-very-dark-cyan;
     width: 100%;
     border-radius: 10px;
+    font-size: 24px;
 
     &::placeholder {
         color: $neutral-color-grayish-cyan;
