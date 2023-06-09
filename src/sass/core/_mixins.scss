@@ -30,6 +30,11 @@ $desktop-breakpoint: 1440px;
     }
 }
 
+@mixin setGrid($col: col) {
+    display: grid;
+    grid-template-columns: repeat($col, 1fr);
+}
+
 // bem class
 @mixin BEM($block, $element, $modifier) {
     #{$block} {

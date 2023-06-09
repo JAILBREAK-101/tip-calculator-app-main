@@ -1,3 +1,5 @@
+@use '../core/index'as *;
+
 .result {
     background-color: $neutral-color-very-dark-cyan;
     padding: 2.5rem 2rem;

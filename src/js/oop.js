@@ -87,8 +87,6 @@ class TipCalculator {
     }
   }
 
-  // Number Input Validation
-
   checkInputs(...inputs) {
     inputs.forEach((input) => {
       input.addEventListener("keypress", (e) => {
@@ -102,24 +100,13 @@ class TipCalculator {
     });
   }
 
-  resetInputs(...e) {
-    e.forEach((value) => {
-      value.value = null;
-      CalculatorApp.bill = "";
-      CalculatorApp.people = "";
-      CalculatorApp.selectedTip = "";
-      CalculatorApp.tip = "0";
-      CalculatorApp.total = "0";
-      CalculatorApp.custom = "";
-      try {
-        value.innerText = initialVal;
-      } catch (err) {
-        console.log(err, "error, not possible");
-      }
-    });
+  resetInputAndText(inputs, texts) {
+    inputs.forEach((value) => (value.value = null));
+    texts.forEach((text) => (text.innerText = ""));
   }
 
   displayResults() {
+    v;
     tipAmount.innerText = this.tip;
     totalAmount.innerText = this.total;
   }
@@ -183,13 +170,12 @@ tipSelects.forEach((select) => {
 });
 
 resetButton.addEventListener("click", () =>
-  CalculatorApp.resetInputs(
-    billAmount,
-    noOfPeople,
-    tipAmount,
-    totalAmount,
-    customTip
-  )
+  CalculatorApp.resetInputAndText({ inputsAndTexts })
 );
+
+const inputsAndTexts = {
+  inputs: [CalculatorApp.bill, CalculatorApp.custom, CalculatorApp.people],
+  texts: [CalculatorApp.total, CalculatorApp.tip],
+};
 
 CalculatorApp.displayResults();

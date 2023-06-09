@@ -1,4 +1,4 @@
-@use '../core/variables';
+@use '../core/index'as *;
 
 .main {
     background-color: $white-color;

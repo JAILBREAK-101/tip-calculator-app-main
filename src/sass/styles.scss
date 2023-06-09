@@ -1,18 +1,8 @@
 // Core
-@import './core/base';
-@import './core/fonts';
-@import './core/mixins';
-@import './core/variables';
+@import './core/index';
 
 // Components
-@import './components/buttons';
-@import './components/input-field';
-@import './components/logo-icon';
-@import './components/selects';
+@import './components/index';
 
 // Layout
-@import './layout/header';
-@import './layout/main';
-@import './layout/control-display';
-@import './layout/result-display';
-@import './layout/footer';
+@import './layout/index';

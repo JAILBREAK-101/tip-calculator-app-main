@@ -1,3 +1,5 @@
+@use '../core/index'as *;
+
 .control {
     display: flex;
     flex-direction: column;
@@ -11,9 +13,13 @@
     }
 
     &-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        @include setGrid($col: 2);
         gap: 1rem;
         margin-top: 1.5rem;
+
+        @include breakpoints("tablet", 'min-width') {
+            @include setGrid($col: 3);
+        }
     }
+
 }
