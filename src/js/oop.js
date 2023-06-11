@@ -18,7 +18,7 @@ totalAmount.innerText = initialVal;
 const tipSelects = document.querySelectorAll("[data-grid-button]");
 
 const resetButton = document.querySelector("[data-reset-button]");
-resetButton.disabled = true;
+// resetButton.disabled = true;
 
 class TipCalculator {
   constructor(initialValue, bill, people, tip, total, custom) {
@@ -49,6 +49,13 @@ class TipCalculator {
     this.people += noOfPeople;
   }
 
+  get calculateTipAmount() {
+    this.setTipAmount(
+      (this.tip =
+        (eval(this.bill / this.people) / 100) * this.selectedTip).toPrecision(4)
+    );
+  }
+
   setTipAmount(tipAmount) {
     this.tip = tipAmount;
   }
@@ -61,12 +68,10 @@ class TipCalculator {
     this.selectedTip = selectedButton;
   }
 
-  // Pure Methods
-  get calculateTipAmount() {
-    this.setTipAmount(
-      (this.tip =
-        (eval(this.bill / this.people) / 100) * this.selectedTip).toPrecision(4)
-    );
+  setDisabled() {
+    billAmount.value.length <= 0 && noOfPeople.value.length <= 0
+      ? (resetButton.disabled = true)
+      : (resetButton.disabled = false);
   }
 
   pickSelect(select) {
@@ -100,28 +105,25 @@ class TipCalculator {
     });
   }
 
-  resetInputAndText(inputs, texts) {
-    inputs.forEach((value) => (value.value = null));
-    texts.forEach((text) => (text.innerText = ""));
+  determineInputs(eventObj, targetInput) {
+    if (eventObj.target.value.includes(eventObj.target.value)) {
+      this.setBillAmount = eventObj.target.value.slice(
+        eventObj.target.value.length - 1
+      );
+      if (eventObj.key === "Backspace") {
+        targetInput = eventObj.target.value.substr(
+          0,
+          eventObj.target.value.length
+        );
+      }
+    }
   }
 
   displayResults() {
-    v;
     tipAmount.innerText = this.tip;
     totalAmount.innerText = this.total;
   }
 }
-
-// Pure Function
-const inputLength = (input) => {
-  if (input.value.length === 0) {
-    CalculatorApp.input = "";
-  }
-};
-
-const setDisabled = (input) => {
-  input.length > 0 ? !resetButton.disabled : "";
-};
 
 const CalculatorApp = new TipCalculator(
   initialVal,
@@ -132,8 +134,18 @@ const CalculatorApp = new TipCalculator(
   customTip.value
 );
 
+let inputs = [CalculatorApp.bill, CalculatorApp.custom, CalculatorApp.people];
+let texts = [CalculatorApp.total, CalculatorApp.tip];
+
+// Pure Functions
+const resetInputAndText = (inputs, texts) => {
+  inputs.forEach((value) => (value.value !== "" ? value.value === "" : null));
+  texts.forEach((text) =>
+    text.innerText !== "" ? text.innerText === initialVal : null
+  );
+};
+
 billAmount.addEventListener("keyup", (e) => {
-  console.log(e.target.value.length);
   if (e.target.value.includes(e.target.value)) {
     CalculatorApp.setBillAmount = e.target.value.slice(
       e.target.value.length - 1
@@ -142,40 +154,23 @@ billAmount.addEventListener("keyup", (e) => {
       CalculatorApp.bill = e.target.value.substr(0, e.target.value.length);
     }
   }
+  // CalculatorApp.determineInputs(e, this.bill);
   CalculatorApp.calculateTipAmount;
   CalculatorApp.displayResults();
 });
 
 noOfPeople.addEventListener("keyup", (e) => {
-  setDisabled(e.target.value.length);
-  if (e.target.value.includes(e.target.value)) {
-    CalculatorApp.setNoOfPeople = e.target.value.slice(
-      e.target.value.length - 1
-    );
-    if (e.key === "Backspace") {
-      CalculatorApp.people = e.target.value.substr(0, e.target.value.length);
-    }
-  }
+  CalculatorApp.determineInputs(e, CalculatorApp.people);
   CalculatorApp.calculateTipAmount;
   CalculatorApp.displayResults();
 });
 
 tipSelects.forEach((select) => {
   select.addEventListener("click", () => {
-    select.classList.toggle("control-grid-select-focus");
     CalculatorApp.pickSelect(select);
-    CalculatorApp.calculateTipAmount;
-    CalculatorApp.displayResults();
   });
+  CalculatorApp.calculateTipAmount;
+  CalculatorApp.displayResults();
 });
 
-resetButton.addEventListener("click", () =>
-  CalculatorApp.resetInputAndText({ inputsAndTexts })
-);
-
-const inputsAndTexts = {
-  inputs: [CalculatorApp.bill, CalculatorApp.custom, CalculatorApp.people],
-  texts: [CalculatorApp.total, CalculatorApp.tip],
-};
-
-CalculatorApp.displayResults();
+resetButton.addEventListener("click", () => resetInputAndText(inputs, texts));
