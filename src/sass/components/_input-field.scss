@@ -1,4 +1,4 @@
-@use '../core/index'as *;
+@use '../core/variables'as *;
 
 .control-input-field {
     display: flex;
@@ -34,12 +34,14 @@
     }
 }
 
-.control-focus-input {
+.control-input {
+    transition: 0.15s outline, 0.18s border ease-in-out;
 
     &:focus-visible,
     &:active,
     &:focus-within {
-        outline: 2px solid $primary-color-strong-cyan;
+        outline: 1px solid $primary-color-strong-cyan;
+        border: 1px solid $primary-color-strong-cyan;
     }
 }
 
@@ -49,6 +51,8 @@
 }
 
 .error-input {
+    transition: 0.15s outline, 0.18s border ease-in-out;
+
     &:focus-visible {
         outline: 1px solid hsl(0, 100%, 50%) !important;
     }

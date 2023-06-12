@@ -1,8 +1,18 @@
 // Core
-@import './core/index';
+@use './core/base';
+@use './core/fonts';
+@use './core/mixins';
+@use './core/variables';
 
 // Components
-@import './components/index';
+@use './components/buttons';
+@use './components/input-field';
+@use './components/logo-icon';
+@use './components/selects';
 
 // Layout
-@import './layout/index';
+@use './layout/control-display';
+@use './layout/result-display';
+@use './layout/header';
+@use './layout/main';
+@use './layout/footer';

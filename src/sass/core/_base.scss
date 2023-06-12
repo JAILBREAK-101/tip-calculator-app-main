@@ -1,5 +1,6 @@
 // FOR BASE AND RESET FILES.
 @use './variables'as *;
+@use './mixins'as *;
 
 *,
 *::before,
@@ -26,6 +27,11 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100%;
+    margin: 1.5rem;
+
+    @include breakpoints('tablet', 'min-width') {
+        margin: 2.5rem;
+    }
 }
 
 html,

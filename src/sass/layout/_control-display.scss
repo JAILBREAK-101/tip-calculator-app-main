@@ -1,4 +1,5 @@
-@use '../core/index'as *;
+@use '../core/variables'as *;
+@use '../core/mixins'as *;
 
 .control {
     display: flex;

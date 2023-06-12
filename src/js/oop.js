@@ -2,6 +2,7 @@
 let initialVal = (0.0).toPrecision(3);
 
 let billAmount = document.querySelector("[data-bill-amount]");
+billAmount.innerText = 0;
 
 let noOfPeople = document.querySelector("[data-no-of-people]");
 
@@ -18,7 +19,11 @@ totalAmount.innerText = initialVal;
 const tipSelects = document.querySelectorAll("[data-grid-button]");
 
 const resetButton = document.querySelector("[data-reset-button]");
-// resetButton.disabled = true;
+
+let formatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});
 
 class TipCalculator {
   constructor(initialValue, bill, people, tip, total, custom) {
@@ -49,11 +54,23 @@ class TipCalculator {
     this.people += noOfPeople;
   }
 
+  /**
+   * @param {any} customTipValue
+   */
+  set setCustomTip(customTipValue) {
+    this.selectedTip
+      ? this.selectedTip === ""
+      : (this.selectedTip = customTipValue);
+    this.custom = customTipValue;
+  }
+
   get calculateTipAmount() {
+    this.amount = this.bill / this.people;
     this.setTipAmount(
-      (this.tip =
-        (eval(this.bill / this.people) / 100) * this.selectedTip).toPrecision(4)
+      (this.tip = (Math.round(this.amount) * 100) / 100).toPrecision(3) *
+        this.selectedTip
     );
+    this.setTotalAmount((this.total = this.amount).toPrecision(3));
   }
 
   setTipAmount(tipAmount) {
@@ -83,42 +100,6 @@ class TipCalculator {
     console.log(this.selectedTip);
   }
 
-  extractTip(tipValue) {
-    let slicedTipValue;
-    if (tipValue.innerText.length > 2) {
-      slicedTipValue = tipValue.innerText.slice(0, 2);
-    } else {
-      slicedTipValue = tipValue.innerText.slice(0, 1);
-    }
-  }
-
-  checkInputs(...inputs) {
-    inputs.forEach((input) => {
-      input.addEventListener("keypress", (e) => {
-        console.log(e);
-        if (parseInt(e.key) === 0) {
-          errorMessage.innerText = "Can't be zero";
-        } else {
-          errorMessage.innerText = "";
-        }
-      });
-    });
-  }
-
-  determineInputs(eventObj, targetInput) {
-    if (eventObj.target.value.includes(eventObj.target.value)) {
-      this.setBillAmount = eventObj.target.value.slice(
-        eventObj.target.value.length - 1
-      );
-      if (eventObj.key === "Backspace") {
-        targetInput = eventObj.target.value.substr(
-          0,
-          eventObj.target.value.length
-        );
-      }
-    }
-  }
-
   displayResults() {
     tipAmount.innerText = this.tip;
     totalAmount.innerText = this.total;
@@ -129,8 +110,8 @@ const CalculatorApp = new TipCalculator(
   initialVal,
   billAmount.value,
   noOfPeople.value,
-  initialVal,
-  initialVal,
+  tipAmount.innerText,
+  totalAmount.innerText,
   customTip.value
 );
 
@@ -145,24 +126,37 @@ const resetInputAndText = (inputs, texts) => {
   );
 };
 
-billAmount.addEventListener("keyup", (e) => {
+const determineCustomTip = () =>
+  customTip.value > 100 ? null : (CalculatorApp.setCustomTip = customTip.value);
+
+billAmount.addEventListener("input", (e) => {
   if (e.target.value.includes(e.target.value)) {
     CalculatorApp.setBillAmount = e.target.value.slice(
       e.target.value.length - 1
     );
+  }
+  CalculatorApp.calculateTipAmount;
+  CalculatorApp.displayResults();
+  billAmount.addEventListener("keyup", (e) => {
     if (e.key === "Backspace") {
       CalculatorApp.bill = e.target.value.substr(0, e.target.value.length);
     }
-  }
-  // CalculatorApp.determineInputs(e, this.bill);
-  CalculatorApp.calculateTipAmount;
-  CalculatorApp.displayResults();
+  });
 });
 
-noOfPeople.addEventListener("keyup", (e) => {
-  CalculatorApp.determineInputs(e, CalculatorApp.people);
+noOfPeople.addEventListener("input", (e) => {
+  if (e.target.value.includes(e.target.value)) {
+    CalculatorApp.setNoOfPeople = e.target.value.slice(
+      e.target.value.length - 1
+    );
+  }
   CalculatorApp.calculateTipAmount;
   CalculatorApp.displayResults();
+  noOfPeople.addEventListener("keyup", (e) => {
+    if (e.key === "Backspace") {
+      CalculatorApp.people = e.target.value.substr(0, e.target.value.length);
+    }
+  });
 });
 
 tipSelects.forEach((select) => {
@@ -173,4 +167,13 @@ tipSelects.forEach((select) => {
   CalculatorApp.displayResults();
 });
 
-resetButton.addEventListener("click", () => resetInputAndText(inputs, texts));
+customTip.addEventListener("input", determineCustomTip);
+
+resetButton.addEventListener("click", () => {
+  billAmount.value = "";
+  noOfPeople.value = "";
+  tipAmount.innerText = initialVal;
+  totalAmount.innerText = initialVal;
+  CalculatorApp.selectedTip = "";
+  customTip.value = "";
+});
