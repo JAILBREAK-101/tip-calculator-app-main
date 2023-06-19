@@ -1,0 +1,24 @@
+@use '../core/variables'as *;
+@use '../core/mixins'as *;
+
+.main {
+    background-color: $white-color;
+    border-radius: 20px;
+    margin: 1rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    max-width: 30%;
+
+    @include breakpoints("tablet", 'min-width') {
+        flex-direction: row;
+        margin: 0.6rem;
+        max-width: 100%;
+        justify-content: space-between;
+        gap: 4rem;
+    }
+
+    @include breakpoints('mobile', 'min-width') {
+        max-width: 100%;
+    }
+}

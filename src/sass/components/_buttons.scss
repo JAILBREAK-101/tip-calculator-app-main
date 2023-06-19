@@ -1,0 +1,28 @@
+@use '../core/variables'as *;
+
+button {
+    padding: 1rem 1.5rem;
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.12s background-color;
+}
+
+.result-button {
+    background-color: $primary-color-strong-cyan;
+    color: $neutral-color-very-dark-cyan;
+
+    &:disabled {
+        opacity: 0.2;
+    }
+
+    &:hover {
+        background-color: $neutral-color-very-light-grayish-cyan;
+    }
+
+    &:disabled {
+        background-color: darken($color: #000000, $amount: 2);
+        opacity: 0.5;
+    }
+}

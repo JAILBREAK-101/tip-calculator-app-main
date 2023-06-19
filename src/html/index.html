@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <title>Tip calculator app</title>
+
+  <!-- <style contenteditable="true" style="white-space: pre;">
+    body {}
+  </style> -->
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Styles - SASS -->
+  <link rel="stylesheet" href="../../public/build/styles.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header class="header">
+      <img src="../../images/logo.svg" alt="Image-Logo" class="header-logo">
+    </header>
+
+    <main class="main">
+
+      <section class="control">
+        <div class="control-block control-bill">
+          <h2 class="control-header">Bill
+            <span class="control-error-msg"></span>
+          </h2>
+          <fieldset class="control-input-field">
+            <label class="control-label" for="bill"><img src="../../images/icon-dollar.svg" alt="Dollar Icon">
+            </label>
+            <input data-bill-amount class="control-input control--bill" type="text" id="bill" name="bill"
+              placeholder="0">
+          </fieldset>
+        </div>
+
+        <div class="control-block control-tip">
+          <h2 class="control-header">Select Tip %</h2>
+
+          <section class="control-grid">
+            <button data-grid-button class="button control-grid-select">5%</button>
+            <button data-grid-button class="button control-grid-select">10%</button>
+            <button data-grid-button class="button control-grid-select">15%</button>
+            <button data-grid-button class="button control-grid-select">25%</button>
+            <button data-grid-button class="button control-grid-select">50%</button>
+            <input type="text" data-custom-tip class="control-input" placeholder="Custom" name="Custom Tip Value">
+            <!-- <button data-grid-button class="button control-grid-button control-grid-button--selected">Custom</button> -->
+          </section>
+        </div>
+
+        <div class="control-block control-people">
+          <h2 class="control-header">Number of People
+            <span data-error-msg class="control-error-msg"></span>
+          </h2>
+          <fieldset class="control-input-field">
+            <label class="control-label" for="people"><img src="../../images/icon-person.svg" alt="Person Icon"></label>
+            <input data-no-of-people class="control-input control--people" type="text" id="people" name="people"
+              placeholder="0">
+          </fieldset>
+        </div>
+      </section>
+
+      <section class="result">
+        <div class="result-display">
+          <section class="result-amount">
+            <h3 class="result-text result-text--big">Tip Amount <span class="result-text--small"> / person</span></h3>
+
+            <h1>$<span class="result-amount--value" data-tip-value></span></h1>
+          </section>
+
+          <section class="result-total">
+            <h3 class="result-text result-text--big">Total <span class="result-text--small"> / person</span></h3>
+
+            <h1>$<span class="result-total--value" data-total-value></span></h1>
+          </section>
+        </div>
+        <button data-reset-button class="button result-button result-button--disabled">RESET</button>
+      </section>
+    </main>
+
+    <footer class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a class="attribution-link" href="https://www.github.com/JAILBREAK-101">Oluwagbemiga</a>.
+    </footer>
+  </div>
+
+  <!-- <script src="../../reserved/objectOriented.js"></script> -->
+  <script src="../js/oop.js" async></script>
+</body>
+
+</html>

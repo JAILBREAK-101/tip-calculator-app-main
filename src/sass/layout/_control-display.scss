@@ -1,0 +1,26 @@
+@use '../core/variables'as *;
+@use '../core/mixins'as *;
+
+.control {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    &-header {
+        font-size: 1rem;
+        color: $neutral-color-grayish-cyan;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &-grid {
+        @include setGrid($col: 2);
+        gap: 1rem;
+        margin-top: 1.5rem;
+
+        @include breakpoints("tablet", 'min-width') {
+            @include setGrid($col: 3);
+        }
+    }
+
+}
