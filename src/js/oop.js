@@ -11,10 +11,10 @@ let customTip = document.querySelector("[data-custom-tip]");
 let errorMessage = document.querySelector("[data-error-msg]");
 
 let tipAmount = document.querySelector("[data-tip-value]");
-tipAmount.innerText = initialVal;
+tipAmount.innerText = (0.0).toPrecision(3);
 
 let totalAmount = document.querySelector("[data-total-value]");
-totalAmount.innerText = initialVal;
+totalAmount.innerText = (0.0).toPrecision(3);
 
 const tipSelects = document.querySelectorAll("[data-grid-button]");
 
@@ -26,9 +26,10 @@ let formatter = new Intl.NumberFormat("en-US", {
 });
 
 class TipCalculator {
-  constructor(initialValue, bill, people, tip, total, custom) {
+  constructor(initialValue, bill, people, tip, total, custom, pickedTip) {
     this.initialValue = initialValue;
     this.bill = bill;
+    this.pickedTip = pickedTip;
     this.people = people;
     this.tip = tip;
     this.total = total;
@@ -58,9 +59,7 @@ class TipCalculator {
    * @param {any} customTipValue
    */
   set setCustomTip(customTipValue) {
-    this.selectedTip
-      ? this.selectedTip === ""
-      : (this.selectedTip = customTipValue);
+    this.pickedTip ? this.pickedTip === "" : (this.pickedTip = customTipValue);
     this.custom = customTipValue;
   }
 
@@ -68,7 +67,7 @@ class TipCalculator {
     this.amount = this.bill / this.people;
     this.setTipAmount(
       (this.tip = (Math.round(this.amount) * 100) / 100).toPrecision(3) *
-        this.selectedTip
+        this.pickedTip
     );
     this.setTotalAmount((this.total = this.amount).toPrecision(3));
   }
@@ -82,7 +81,7 @@ class TipCalculator {
   }
 
   setSelect(selectedButton) {
-    this.selectedTip = selectedButton;
+    this.pickedTip = selectedButton;
   }
 
   setDisabled() {
@@ -97,7 +96,7 @@ class TipCalculator {
     } else {
       this.setSelect(select.innerText.slice(0, 1));
     }
-    console.log(this.selectedTip);
+    console.log(this.pickedTip);
   }
 
   displayResults() {
@@ -126,8 +125,10 @@ const resetInputAndText = (inputs, texts) => {
   );
 };
 
-const determineCustomTip = () =>
-  customTip.value > 100 ? null : (CalculatorApp.setCustomTip = customTip.value);
+const determineCustomTip = () => {
+  if (customTip.value > 100) return;
+  CalculatorApp.pickedTip = customTip.value;
+};
 
 billAmount.addEventListener("input", (e) => {
   if (e.target.value.includes(e.target.value)) {
@@ -174,6 +175,6 @@ resetButton.addEventListener("click", () => {
   noOfPeople.value = "";
   tipAmount.innerText = initialVal;
   totalAmount.innerText = initialVal;
-  CalculatorApp.selectedTip = "";
+  CalculatorApp.pickedTip = "";
   customTip.value = "";
 });
